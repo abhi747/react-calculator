@@ -1,8 +1,9 @@
 import React from 'react';
 import './Input.scss';
 
-const Input = () => (
+const Input = ({input}) => (
     <div className="input">
+        {input}
     </div>
 );
 
