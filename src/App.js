@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from './Input/Input';
-import { trimStr, isOperator, overrideOperator, formatNumberWithDecimals, peekInput } from './util';
+import { trimStr, isOperator, overrideOperator, formatNumberWithDecimals, unFormatNumberWithCommas, peekInput } from './util';
 import Buttons from './Buttons/Buttons';
 import './App.scss';
 
@@ -20,7 +20,7 @@ function App() {
       concatedInput = overrideOperator(input, userInput);
     }
     concatedInput = trimInputLength(concatedInput);
-
+    
     setInput((input) => {
       const res = input === "0" && !isOperator(peekInput(concatedInput)) ? userInput : concatedInput;
       return formatNumberWithDecimals(res);
@@ -40,7 +40,7 @@ function App() {
   const handleEqual = () => {
     let res = "";
     try {
-      res = eval(input.replace(",",""));
+      res = eval(unFormatNumberWithCommas(input));
     } catch (e) {
       res = "";
     }

@@ -8,7 +8,7 @@ const isOperator = (text) => {
 };
 
 const toggleMinus = (input) => {
-    const negatedInput = -input.replace(",","");
+    const negatedInput = -unFormatNumberWithCommas(input);
     return formatNumberWithCommas(negatedInput.toString());
 }
 
@@ -20,15 +20,24 @@ const peekInput = (input) => {
     return input.substr(input.length - 1);
 }
 
-const formatNumberWithCommas = (numberStr) =>  numberStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+const isValidKeyInput = (input) => {
+    if (!isNaN(Number(input)) || input === "/" || input === "*" || input === "+" || input === "-")
+        return true;
+    return false
+}
+
+const formatNumberWithCommas = (numberStr) => numberStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 const formatNumberWithDecimals = (numberStr) => {
-    if (Number.isNaN(Number(numberStr)))
+    const numStrWithoutCommas = unFormatNumberWithCommas(numberStr);
+    if (Number.isNaN(Number(numStrWithoutCommas)))
         return numberStr;
-    if (Number.isInteger(Number(numberStr)))
-        return formatNumberWithCommas(numberStr);
+    if (Number.isInteger(Number(numStrWithoutCommas)))
+        return formatNumberWithCommas(numStrWithoutCommas);
     return Number(numberStr).toFixed(4).toString();
 }
 
-export { trimStr, overrideOperator, isOperator, toggleMinus, popInput, peekInput,formatNumberWithCommas, formatNumberWithDecimals };
+const unFormatNumberWithCommas = (numberStr) => numberStr.replace(/,/g, '');
+
+export { trimStr, overrideOperator, isOperator, toggleMinus, popInput, peekInput, isValidKeyInput, formatNumberWithCommas, formatNumberWithDecimals, unFormatNumberWithCommas };
 
