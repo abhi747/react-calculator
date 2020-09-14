@@ -8,6 +8,10 @@ function App() {
   const [input, setInput] = useState("0");
 
   const handleClick = (userInput) => {
+
+    if (input === "Syntax Error")
+      return;
+
     let concatedInput = `${input}${userInput}`;
     if (!isValidateInput(concatedInput)) return;
 
@@ -27,8 +31,9 @@ function App() {
     });
   }
 
-  const isValidateInput = (input) => {
-    if (/\.\d*\.+/g.test(input)) return false; // To prevent multiple dots
+  const isValidateInput = (concatedInput) => {
+    if (/\.\d*\.+/g.test(concatedInput)) return false; // To prevent multiple dots
+    if (isOperator(peekInput(concatedInput)) && peekInput(concatedInput) === peekInput(input)) return false; // To prevent adjacent duplicate operators
     return true;
   }
 
@@ -40,11 +45,11 @@ function App() {
   const handleEqual = () => {
     let res = "";
     try {
-      res = eval(unFormatNumberWithCommas(input));
+      res = eval(unFormatNumberWithCommas(input)).toString();
     } catch (e) {
-      res = "";
+      res = "Syntax Error";
     }
-    setInput(formatNumberWithDecimals(res.toString()));
+    setInput(formatNumberWithDecimals(res));
   }
 
   return (
