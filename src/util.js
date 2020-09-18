@@ -1,7 +1,7 @@
 const trimStr = (str, end) => str.slice(0, end);
 
 const overrideOperator = (input, operator) =>
-input.replace(/[\*\/\+\-]*$/, operator);
+    input.replace(/[*/+-]*$/, operator);
 
 const isOperator = (text) => {
     return isNaN(text) && text !== "."
@@ -13,7 +13,7 @@ const toggleMinus = (input) => {
 }
 
 const popInput = (input) => {
-   return input.length > 1? input.slice(0, -1) : "0"
+    return input.length > 1 ? input.slice(0, -1) : "0"
 };
 
 const peekInput = (input) => {
@@ -34,7 +34,9 @@ const formatNumberWithDecimals = (numberStr) => {
         return numberStr;
     if (Number.isInteger(Number(numStrWithoutCommas)))
         return formatNumberWithCommas(numStrWithoutCommas);
-    return Number(numberStr).toFixed(4).toString();
+    if (numberStr.split(".")[1].length > 4)
+        return Number(numberStr).toFixed(4).toString();
+    return numberStr;
 }
 
 const unFormatNumberWithCommas = (numberStr) => numberStr.replace(/,/g, '');

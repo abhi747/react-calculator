@@ -2,7 +2,7 @@ import React from "react";
 import { isOperator } from "../util";
 import "./Button.scss";
 
-const Button = ({ isZero, children, handleClick }) => {
+const Button = ({ isZero, children, handleClick, id }) => {
     
     const isEqual = (text) => text === "=";
 
@@ -12,6 +12,7 @@ const Button = ({ isZero, children, handleClick }) => {
             ${isOperator(children) ? "operator" : ""}
             ${isEqual(children) ? "equal" : ""}
             `}
+            id={id}
             onClick={handleClick}
         >
             {children}
