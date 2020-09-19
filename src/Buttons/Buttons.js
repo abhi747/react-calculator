@@ -21,6 +21,7 @@ const Buttons = ({ handleClick, handleEqual, input, setInput }) => {
             handleClick(event.key);
     }
 
+
     return (
         <div className="buttons-container">
             <div id="buttons-grid" className="buttons-grid">
@@ -31,7 +32,6 @@ const Buttons = ({ handleClick, handleEqual, input, setInput }) => {
         </Button>
 
                 <Button id="divide" handleClick={(_) => handleClick("/")}>&#247;</Button>
-
                 <Button id="seven" handleClick={(_) => handleClick("7")}>7</Button>
                 <Button id="eight" handleClick={(_) => handleClick("8")}>8</Button>
                 <Button id="nine" handleClick={(_) => handleClick("9")}>9</Button>

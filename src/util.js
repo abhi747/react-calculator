@@ -13,6 +13,8 @@ const toggleMinus = (input) => {
 }
 
 const popInput = (input) => {
+    if (input === "Error")
+        return input;
     return input.length > 1 ? input.slice(0, -1) : "0"
 };
 

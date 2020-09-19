@@ -4,6 +4,8 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    font-size: 2.5rem;
+    overflow-wrap: anywhere;
+    overflow-y: auto;
     color: whitesmoke;
+    transition: font-size 0.3s ease;
 }

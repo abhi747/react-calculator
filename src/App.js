@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { evaluate } from 'mathjs'
 import Input from './Input/Input';
-import { trimStr, isOperator, overrideOperator, formatNumberWithDecimals, unFormatNumberWithCommas, peekInput } from './util';
+import { isOperator, overrideOperator, formatNumberWithDecimals, unFormatNumberWithCommas, peekInput } from './util';
 import Buttons from './Buttons/Buttons';
 import './App.scss';
 
@@ -9,8 +9,7 @@ function App() {
   const [input, setInput] = useState("0");
 
   const handleClick = (userInput) => {
-
-    if (input === "Syntax Error")
+    if (input === "Error")
       return;
 
     let concatedInput = `${input}${userInput}`;
@@ -24,7 +23,6 @@ function App() {
     ) {
       concatedInput = overrideOperator(input, userInput);
     }
-    concatedInput = trimInputLength(concatedInput);
     
     setInput((input) => {
       const res = input === "0" && !isOperator(peekInput(concatedInput)) ? userInput : concatedInput;
@@ -38,17 +36,12 @@ function App() {
     return true;
   }
 
-  const trimInputLength = (input) => {
-    if (input.length > 15) return trimStr(input, 15);
-    return input;
-  }
-
   const handleEqual = () => {
     let res = "";
     try {
       res = evaluate(unFormatNumberWithCommas(input)).toString();
     } catch (e) {
-      res = "Syntax Error";
+      res = "Error";
     }
     setInput(formatNumberWithDecimals(res));
   }
