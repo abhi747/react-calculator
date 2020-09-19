@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { evaluate } from 'mathjs'
 import Input from './Input/Input';
 import { trimStr, isOperator, overrideOperator, formatNumberWithDecimals, unFormatNumberWithCommas, peekInput } from './util';
 import Buttons from './Buttons/Buttons';
@@ -45,7 +46,7 @@ function App() {
   const handleEqual = () => {
     let res = "";
     try {
-      res = eval(unFormatNumberWithCommas(input)).toString();
+      res = evaluate(unFormatNumberWithCommas(input)).toString();
     } catch (e) {
       res = "Syntax Error";
     }
