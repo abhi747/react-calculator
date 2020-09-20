@@ -23,7 +23,7 @@ const peekInput = (input) => {
 }
 
 const isValidKeyInput = (input) => {
-    if (!isNaN(Number(input)) || input === "/" || input === "*" || input === "+" || input === "-")
+    if (!isNaN(Number(input)) || input === "/" || input === "*" || input === "+" || input === "-" || input === ".")
         return true;
     return false
 }
