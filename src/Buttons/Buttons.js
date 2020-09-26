@@ -25,8 +25,8 @@ const Buttons = ({ handleClick, handleEqual, input, setInput }) => {
     return (
         <div className="buttons-container">
             <div id="buttons-grid" className="buttons-grid">
-                <Button id="clear" handleClick={(_) => setInput("0")}>C</Button>
-                <Button id="backspace" handleClick={(_) => setInput(popInput(input))}>&#8592;</Button>
+                <Button id="clear" handleClick={(_) => setInput("0")}>AC</Button>
+                <Button id="backspace" handleClick={(_) => setInput(popInput(input))}>DEL</Button>
                 <Button id="plusminus" handleClick={(_) => setInput(toggleMinus(input))}>
                     &#177;
         </Button>

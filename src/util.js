@@ -28,6 +28,8 @@ const isValidKeyInput = (input) => {
     return false
 }
 
+const spaceOutOperators = (input) => input.replace(/(\d+)([/*+-]+)(?=\d*)/g, "$1 $2 ");
+
 const formatNumberWithCommas = (numberStr) => numberStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 const formatNumberWithDecimals = (numberStr) => {
@@ -43,5 +45,5 @@ const formatNumberWithDecimals = (numberStr) => {
 
 const unFormatNumberWithCommas = (numberStr) => numberStr.replace(/,/g, '');
 
-export { trimStr, overrideOperator, isOperator, toggleMinus, popInput, peekInput, isValidKeyInput, formatNumberWithCommas, formatNumberWithDecimals, unFormatNumberWithCommas };
+export { trimStr, overrideOperator, isOperator, toggleMinus, popInput, peekInput, isValidKeyInput, spaceOutOperators, formatNumberWithCommas, formatNumberWithDecimals, unFormatNumberWithCommas };
 

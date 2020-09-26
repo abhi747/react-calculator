@@ -7,12 +7,14 @@ import './App.scss';
 
 function App() {
   const [input, setInput] = useState("0");
+  const [isCalculationDone, setIsCalculationDone] = useState(false);
 
   const handleClick = (userInput) => {
     if (input === "Error")
       return;
 
-    let concatedInput = `${input}${userInput}`;
+    let concatedInput = getConcatedInput(userInput);
+
     if (!isValidateInput(concatedInput)) return;
 
     /** Override subsequent operator if it is not minus */
@@ -36,7 +38,16 @@ function App() {
     return true;
   }
 
+  const getConcatedInput = (userInput) => {
+    setIsCalculationDone(false);
+    if (isCalculationDone && !isOperator(peekInput(userInput))) {
+      return userInput;
+    }
+    return `${input}${userInput}`;
+  }
+
   const handleEqual = () => {
+    setIsCalculationDone(true);
     let res = "";
     try {
       res = evaluate(unFormatNumberWithCommas(input)).toString();
